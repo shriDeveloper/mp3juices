@@ -22,7 +22,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR,"/home/you2mp3/you2mp3/static")
 
 MEDIA_URL = '/home/you2mp3/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'/home/you2mp3/media')
+MEDIA_ROOT=os.path.join(BASE_DIR,'/home/ubuntu/mp3juices/media')
 
 
 # Quick-start development settings - unsuitable for production
