@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /search/search
+Sitemap: https://www.mp3juices.es/sitemap.xml

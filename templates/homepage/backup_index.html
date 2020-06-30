@@ -1,0 +1,447 @@
+{% load static %}
+{% load social_share %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <style type="text/css">
+  .gly-spin {
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+  </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <title>You2Mp3 Converter</title>
+
+  </head>
+
+  <body>
+
+
+<!--NAV BAR -->
+
+<!--
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">You2Mp3 Converter</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form class="navbar-form" role="search" action ="{%url 'search:search'%}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" id="v_id" autocomplete="off">
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit" id="myBtn"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+-->
+
+<!-- ENDS HERE -->
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-8   col-md-offset-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-lg" placeholder="Search" name="q" id="v_id" autocomplete="off">
+                        <div class="input-group-btn">
+                            <button class="btn btn-success btn-lg" id="clk"><i class="glyphicon glyphicon-download" id="downloader"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    {% post_to_facebook object_or_url "Post to Facebook!" %}
+                </div>
+
+                <div class="col-md-3">
+                    {% post_to_twitter object_or_url "Post to Twitter" %}
+                </div>
+
+                <div class="col-md-3">
+                    {% post_to_reddit object_or_url "Post to reddit" %}
+                </div>
+
+                <div class="col-md-3">
+                    {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+
+<!-- CLEAR FIX EXXAMPLE -->
+
+<!-- <div class="clearfix hidden-lg hidden-sm"-->
+<!--best site-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+function onFocus(){
+	paste();
+};
+window.onfocus = onFocus;
+</script>
+
+<script type="text/javascript">
+
+async function paste() {
+  const text = await navigator.clipboard.readText();
+  $( "#v_id" ).val(text);
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+$('#clk').click(function(){
+
+    var q=$("#v_id").val();
+
+    $('#downloader').removeClass("glyphicon-download");
+    $('#downloader').addClass("glyphicon-refresh");
+    $('#downloader').addClass("gly-spin");
+
+    $.ajax({
+        type: 'POST',
+        data:{"query":q},
+        url:'/search/search/',
+        dataType: "json",
+        success: function(result) {
+           // https://www.youtube.com/watch?v=iHibnmosKkM
+
+             $('#downloader').removeClass("glyphicon-refresh");
+             $('#downloader').removeClass("gly-spin");
+             $('#downloader').addClass("glyphicon-download");
+
+
+             window.location='download/'+result.url_link;
+        }
+    });
+
+});
+
+
+
+
+
+
+</script>
+
+
+  </body>
+</html>
+
+<!-- CHAINSMOKERS SECTION -->
+<!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        Top Links | <a href="https://www.you2mp3.online/songs/the-chainsmokers-songs-download" target="_blank">Chainsmokers Songs Download</a> |-->
+                <!--        <a href="https://www.you2mp3.online/songs/kabir-singh-songs-download-free" target="_blank">Kabir Singh Songs Download</a>-->
+
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<br/>-->
+                <!--<hr/>-->
+                <!--<br/>-->
+
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <div class="container text-center">-->
+                <!--            <h1>Top Songs Hindi Mp3</h1>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<br/>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <div class="container">-->
+                <!--            Top Hindi Songs are the songs that are constantly performing on hindi music charts. These songs are listened by indian people millions of times, hence are much popular in the industry. We have covered top hindi songs from year 2019 - 2020 , that are popular in india.-->
+
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+
+                <!--<br>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <table class="table">-->
+                <!--              <thead>-->
+                <!--                <tr>-->
+                <!--                  <th scope="col"># Rank</th>-->
+                <!--                  <th scope="col">Song Name & Artist Name</th>-->
+                <!--                  <th scope="col">Movie & Year</th>-->
+                <!--                  <th scope="col">Download Times</th>-->
+                <!--                </tr>-->
+                <!--              </thead>-->
+                <!--              <tbody>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">1</th>-->
+                <!--                  <td>tera ban jaunga mp3 song download (Arjit Singh)</td>-->
+                <!--                  <td>Kabir Singh (2019)</td>-->
+                <!--                  <td><b>7.9 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">2</th>-->
+                <!--                  <td>Pachtaoge (Arjit Singh)</td>-->
+                <!--                  <td>Jaani Ve (2019)</td>-->
+                <!--                  <td><b>6.4 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">3</th>-->
+                <!--                  <td>Dheeme Dheeme (Tony Kakkar)</td>-->
+                <!--                  <td>Dheeme Dheeme (2019)</td>-->
+                <!--                  <td><b>5.4 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">4</th>-->
+                <!--                  <td>asli hip hop song download (Ranveer Singh)</td>-->
+                <!--                  <td>Gully Boy (2019)</td>-->
+                <!--                  <td><b>2.1 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--                <tr>-->
+                <!--                  <th scope="row">5</th>-->
+                <!--                  <td>Tujhe Kitna Chahne Lage (Arjit Singh)</td>-->
+                <!--                  <td>Kabir Singh (2019)</td>-->
+                <!--                  <td><b>1.4 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--              </tbody>-->
+                <!--            </table>-->
+                <!--    </div>-->
+                <!--</div>-->
+
+
+                <!--<br>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <div class="container text-center">-->
+                <!--            <h1>Old Hindi Movies Songs</h1>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<br/>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <div class="container">-->
+                <!--            "Old is always Gold" is what they say. People in india love old hindi music do much , that they do lot of searches on old popular artists like Lata Mangeskar , Kishore Kumar , Mohammed Rafi and more such artists.-->
+                <!--            <br/><br/>-->
+                <!--            These old songs have caught peoples attention by lyrics as well as the quality of music they have. In our list, below songs were downloaded from old hindi movies a lot of times.-->
+
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <table class="table">-->
+                <!--              <thead>-->
+                <!--                <tr>-->
+                <!--                  <th scope="col"># Rank</th>-->
+                <!--                  <th scope="col">Song Name & Artist Name</th>-->
+                <!--                  <th scope="col">Movie & Year</th>-->
+                <!--                  <th scope="col">Download Times</th>-->
+                <!--                </tr>-->
+                <!--              </thead>-->
+                <!--              <tbody>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">1</th>-->
+                <!--                  <td>Pal Pal Dil Ke Paas (Kishore Kumar and Lata Mangeshkar)</td>-->
+                <!--                  <td>BlackMail (1973)</td>-->
+                <!--                  <td><b>9 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">2</th>-->
+                <!--                  <td>Mere Sapno Ki Rani Kab Aayegi Tu (Kishore Kumar)</td>-->
+                <!--                  <td>Aaradhna (1969)</td>-->
+                <!--                  <td><b>7.8 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">3</th>-->
+                <!--                  <td>Koi Haseena Jab (Kishore Kumar)</td>-->
+                <!--                  <td>Sholay (1975)</td>-->
+                <!--                  <td><b>5.6 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--                <tr>-->
+                <!--                  <th scope="row">4</th>-->
+                <!--                  <td>Ek Ajnabi Hasina Se (Kishore Kumar)</td>-->
+                <!--                  <td>Ajnabee (1974)</td>-->
+                <!--                  <td><b>3.4 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--                <tr>-->
+                <!--                  <th scope="row">5</th>-->
+                <!--                  <td>Ek Ladki Bhigi Bhagi Si (Kishore Kumar)</td>-->
+                <!--                  <td>Chalti Ka Naam Gadi (1958)</td>-->
+                <!--                  <td><b>1.3 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--              </tbody>-->
+                <!--            </table>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <div class="container text-center">-->
+                <!--            <h1>New Bollywood Movies Songs</h1>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+
+                <!--<br/>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <div class="container">-->
+                <!--            Bollywood has lot of creative artists , that catch peoples attention, by making best tracks every year. One of the most best thing is you can use to mp3 free <b>download indian songs.</b>-->
+                <!--            <br/><br/>-->
+                <!--            Every year, these guys launch great albums , which are featured in our list as well.-->
+
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<div class="row">-->
+                <!--    <div class="col-md-12">-->
+                <!--        <table class="table">-->
+                <!--              <thead>-->
+                <!--                <tr>-->
+                <!--                  <th scope="col"># Rank</th>-->
+                <!--                  <th scope="col">Song Name & Artist Name</th>-->
+                <!--                  <th scope="col">Movie & Year</th>-->
+                <!--                  <th scope="col">Download Times</th>-->
+                <!--                </tr>-->
+                <!--              </thead>-->
+                <!--              </thead>-->
+                <!--              <tbody>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">1</th>-->
+                <!--                  <td>Malang (Ved Sharma)</td>-->
+                <!--                  <td>Malang (2020)</td>-->
+                <!--                  <td><b>9.1 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">2</th>-->
+                <!--                  <td>Get ready to Fight Reloaded (Pranaay)</td>-->
+                <!--                  <td>Baaghi 3 (2020)</td>-->
+                <!--                  <td><b>8.9 K</b></td>-->
+                <!--                </tr>-->
+                <!--                <tr>-->
+                <!--                  <th scope="row">3</th>-->
+                <!--                  <td>OLE OLE 2.0 (Abhijeet Bhattacharya & Amit Mishra)</td>-->
+                <!--                  <td>Jawani Janeman (2020)</td>-->
+                <!--                  <td><b>4.5 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--                <tr>-->
+                <!--                  <th scope="row">4</th>-->
+                <!--                  <td>Intezaar (THEMXXNLIGHT)</td>-->
+                <!--                  <td>Intezaar (2020)</td>-->
+                <!--                  <td><b>1.9 K</b></td>-->
+                <!--                </tr>-->
+
+                <!--                <tr>-->
+                <!--                  <th scope="row">5</th>-->
+                <!--                  <td>Dus Bahane 2.0 (Vishal & Shekhar)</td>-->
+                <!--                  <td>Baaghi 3 (2020)</td>-->
+                <!--                  <td><b>1.2 K</b></td>-->
+                <!--                </tr>-->
+                <!--              </tbody>-->
+                <!--            </table>-->
+                <!--    </div>-->

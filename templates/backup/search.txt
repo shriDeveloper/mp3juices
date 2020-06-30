@@ -1,0 +1,69 @@
+import youtube_dl
+import os
+import re
+import uuid
+from youtube_search import YoutubeSearch
+from django.http import HttpResponse,Http404
+from django.conf import settings
+from django.shortcuts import render,redirect
+def search(request):
+    query=request.GET.get("song_id")
+    song_name=request.GET.get('short_hand')+".mp3"
+    if query is None:
+        return render(request,'homepage/index_new.html')
+    result=str(uuid.uuid1()).split('-')[0]+".mp3"
+    ydl_opts = {
+    'format': 'worstaudio/worst',
+    'postprocessors': [{'key': 'FFmpegExtractAudio',
+               'preferredcodec': 'mp3',
+               'preferredquality': '192'}],
+    'outtmpl': 'media/'+result,
+    'noplaylist':True,
+    'ignoreerrors':True,
+    'max-downloads':1,
+    }
+    ydl = youtube_dl.YoutubeDL(ydl_opts)
+    #try:
+        #title=(ydl.extract_info(query,download=False))['title']
+    #except Exception:
+        #return render(request,'homepage/index_new.html',{'ERROR':"This song is not available in mp3 format . Please try other options ."})
+    #title=re.sub('[\W_]+', '', str(title))+".mp3"
+    try:
+        ydl.download([query])
+    except  youtube_dl.utils.DownloadError:
+        return render(request,'homepage/index_new.html',{'ERROR':"This Songs is not available in your country."})
+    except  youtube_dl.utils.UnavailableVideoError:
+        return render(request,'homepage/index_new.html',{'ERROR':"Mp3 format is not available for this song."})
+    except  youtube_dl.utils.GeoRestrictedError:
+        return render(request,'homepage/index_new.html',{'ERROR':"Song is not available in your country."})
+    except  youtube_dl.utils.YoutubeDLError:
+        return render(request,'homepage/index_new.html',{'ERROR':"Some error occured. Try again please."})
+    file_path = os.path.join(settings.MEDIA_ROOT, result)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + song_name
+            return response
+    raise Http404
+    #return redirect('/download/'+result+'/'+title)
+    #path='media/'+result
+    #response = FileResponse(open(''+path, 'rb'))
+    #response['Content-Type'] = 'audio/mpeg'
+    #response['Content-Disposition'] = 'attachment; filename='+title
+    #return response
+def autosuggest(request):
+    data = request.GET.get("term")
+    if data.startswith('https://') or data.startswith('http://'):
+        v = re.search("(?:\/|%3D|v=|vi=)([0-9A-z-_]{11})(?:[%#?&]|$)", data)
+        data="https://www.youtube.com/watch?v="+v.group(1)
+    #version = request.GET.get("version")
+    if data is None:
+        return render(request,'homepage/index_new.html')
+    results = YoutubeSearch(''+data, max_results=5).to_dict()
+    for result in results:
+        title=result['title']
+        title=re.sub('[\W_]+', '', str(title),flags=re.ASCII)
+        result['short_hand']=title
+    #if version == "hn":
+        #return render(request,'homepage/hindi-music-download.html',{'songs':results,'query':data})
+    return render(request,'homepage/index_new.html',{'songs':results,'query':data})
