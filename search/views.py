@@ -30,7 +30,7 @@ def search(request):
     file_path = os.path.join(settings.MEDIA_ROOT, result)
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response = HttpResponse("ec2-18-223-136-205.us-east-2.compute.amazonaws.com/media/"+fh.read(), content_type="application/vnd.ms-excel")
             response['Content-Disposition'] = 'inline; filename=' + song_name
             return response
     raise Http404
