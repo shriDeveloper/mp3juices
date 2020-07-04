@@ -29,13 +29,13 @@ def search(request):
         ydl.download([query])
     except  youtube_dl.utils.DownloadError:
         return render(request,'homepage/index_new.html',{'ERROR':"This Songs is not available in your country."})
-    return redirect('ec2-18-223-136-205.us-east-2.compute.amazonaws.com/media/'+result,content_type="application/vnd.ms-excel")
-#     file_path = os.path.join(settings.MEDIA_ROOT, result)
-#     if os.path.exists(file_path):
-#         with open(file_path, 'rb') as fh:
-#             response = HttpResponse("ec2-18-223-136-205.us-east-2.compute.amazonaws.com/media/"+fh.read(), content_type="application/vnd.ms-excel")
-#             response['Content-Disposition'] = 'inline; filename=' + song_name
-#             return response
+#     return redirect('ec2-18-223-136-205.us-east-2.compute.amazonaws.com/media/'+result,content_type="application/vnd.ms-excel")
+    file_path = os.path.join(settings.MEDIA_ROOT, result)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse("ec2-18-223-136-205.us-east-2.compute.amazonaws.com/media/"+fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + song_name
+            return response
     raise Http404
 @csrf_exempt
 def autosuggest(request):
