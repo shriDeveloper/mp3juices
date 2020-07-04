@@ -21,6 +21,8 @@ def search(request):
     'noplaylist':True,
     'ignoreerrors':True,
     'max-downloads':1,
+    'external-downloader':'aria2c',
+    'external-downloader-args':'-c -j 3 -x 3 -s 3 -k 1M',
     }
     ydl = youtube_dl.YoutubeDL(ydl_opts)
     try:
