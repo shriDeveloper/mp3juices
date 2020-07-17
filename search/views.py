@@ -8,7 +8,6 @@ from django.conf import settings
 from django.shortcuts import render,redirect
 def search(request):
     query=request.GET.get("term")
-    print("QUERY Is",query)
     if query is None:
         return redirect('/')
     result=str(uuid.uuid1())+'.mp3'
@@ -22,7 +21,7 @@ def search(request):
     'ignoreerrors':True,
     'max-downloads':1,
     '--external-downloader':'aria2c',
-     '--external-downloader-args':'-c -j 3 -x 3 -s 3 -k 1M',
+    '--external-downloader-args':'-x 8 -s 8 -k 1M',
     }
     ydl = youtube_dl.YoutubeDL(ydl_opts)
     info_dict = ydl.extract_info(query, download=True)
