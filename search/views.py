@@ -21,7 +21,7 @@ def search(request):
     'ignoreerrors':True,
     'max-downloads':1,
     '--external-downloader':'aria2c',
-    '--external-downloader-args':'-x 8 -s 8 -k 1M',
+    '--external-downloader-args':'-c 8 -x 8 -s 8 -k 1M',
     }
     ydl = youtube_dl.YoutubeDL(ydl_opts)
     info_dict = ydl.extract_info(query, download=True)
