@@ -1,3 +1,3 @@
 User-agent: *
 Disallow: /search/search
-Sitemap: https://ytmp3.ml/sitemap.xml
+Sitemap: https://mymp3.ml/sitemap.xml
